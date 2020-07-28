@@ -88,7 +88,15 @@
       <div class="ar-player__time">{{duration}}</div>
       <volume-control @change-volume="_onChangeVolume"/>
     </div>
-
+    <wavesurfer
+      data-url="audioSource"
+      data-plugins="minimap"
+      data-minimap-height="30"
+      data-minimap-wave-color="#ddd"
+      data-minimap-progress-color="#999"
+      data-timeline-font-size="13px"
+    >
+    </wavesurfer>
     <audio :id="playerUniqId" :src="audioSource"></audio>
   </div>
 </template>
@@ -98,6 +106,7 @@
   import LineControl   from './line-control'
   import VolumeControl from './volume-control'
   import { convertTimeMMSS } from '@/lib/utils'
+  import WaveSurfer from 'wavesurfer.js/dist/wavesurfer';
 
   export default {
     props: {
@@ -166,6 +175,7 @@
 
         this.isPlaying = !this.isPlaying
       },
+
       _resetProgress () {
         if (this.isPlaying) {
           this.player.pause()
